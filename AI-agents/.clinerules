@@ -1,7 +1,0 @@
-When using tools, you MUST use the exact tool-calling
-format supported by Cline. Never print JSON objects
-as a substitute for calling tools.
-
-Do not tell the user that you cannot access files.
-Use the available tools to read, create, and edit files.
-If a tool call fails, report the actual error.
