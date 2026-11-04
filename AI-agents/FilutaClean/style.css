@@ -26,7 +26,7 @@
 
         body {
             margin: 0;
-            font-family: "Courier View";
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
             color: var(--text);
             background: var(--background);
             line-height: 1.65;
