@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Профессиональные услуги клининга от ИП Филюта: уборка квартир, домов, офисов, мытье окон и химчистка мебели. Высокое качество, эко-средства и выгодные цены.">
+    <title>Клининговая компания «ИП Филюта» — Профессиональная уборка и чистота</title>
+    
+    <!-- Подключение Tailwind CSS через CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#00A8E8',
+                            hoverBlue: '#0086BA',
+                            teal: '#00C49F',
+                            hoverTeal: '#00A383',
+                            dark: '#1E293B',
+                            lightBg: '#F0F7FF',
+                            cardBg: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Courier View'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Плавная прокрутка */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Видимый фокус для клавиатурной навигации */
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 3px solid #00C49F;
+            outline-offset: 2px;
+        }
+
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00A8E8;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0086BA;
+        }
+
+        /* Анимация пульсации для акцентных кнопок */
+        @keyframes subtle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .animate-pulse-subtle {
+            animation: subtle-pulse 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-brand-dark antialiased selection:bg-brand-teal selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER / НАВИГАЦИЯ -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Логотип -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none" aria-label="ИП Филюта - На главную">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-teal flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <i class="fa-solid fa-sparkles text-xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl leading-none text-brand-dark tracking-tight">ИП Филюта</span>
+                    <span class="text-xs text-brand-blue font-medium mt-1">Клининговая компания</span>
+                </div>
+            </a>
+
+            <!-- Десктопное меню -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                <a href="#about" class="hover:text-brand-blue transition-colors duration-200">О компании</a>
+                <a href="#services" class="hover:text-brand-blue transition-colors duration-200">Услуги</a>
+                <a href="#advantages" class="hover:text-brand-blue transition-colors duration-200">Преимущества</a>
+                <a href="#portfolio" class="hover:text-brand-blue transition-colors duration-200">Работы</a>
+                <a href="#contacts" class="hover:text-brand-blue transition-colors duration-200">Контакты</a>
+            </nav>
+
+            <!-- Кнопка вызова -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="#contacts" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-brand-blue text-white font-medium hover:bg-brand-hoverBlue transition-all shadow-md hover:shadow-lg active:scale-95">
+                    <i class="fa-solid fa-phone-volume mr-2"></i>
+                    Заказать звонок
+                </a>
+            </div>
+
+            <!-- Гамбургер кнопка для мобилок -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-slate-100 transition-colors focus:outline-none" aria-label="Открыть меню">
+                <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-slate-600 font-medium hover:text-brand-blue transition-colors">О компании</a>
+            <a href="#services" class="block py-2 text-slate-600 font-medium hover:text-brand-blue transition-colors">Услуги</a>
+            <a href="#advantages" class="block py-2 text-slate-600 font-medium hover:text-brand-blue transition-colors">Преимущества</a>
+            <a href="#portfolio" class="block py-2 text-slate-600 font-medium hover:text-brand-blue transition-colors">Работы</a>
+            <a href="#contacts" class="block py-2 text-slate-600 font-medium hover:text-brand-blue transition-colors">Контакты</a>
+            <div class="pt-2">
+                <a href="#contacts" class="w-full inline-flex items-center justify-center px-5 py-3 rounded-xl bg-brand-blue text-white font-medium hover:bg-brand-hoverBlue transition-colors shadow-sm">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Оформить заявку
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO БЛОК -->
+        <section class="relative bg-gradient-to-b from-brand-lightBg via-white to-white py-16 md:py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Текст Hero -->
+                    <div class="space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-brand-teal text-sm font-semibold border border-emerald-100">
+                            <i class="fa-solid fa-shield-check"></i> 100% Гарантия чистоты и порядка
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark tracking-tight leading-tight">
+                            Профессиональная уборка <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-teal">квартир и офисов</span>
+                        </h1>
+                        <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-normal">
+                            «ИП Филюта» — берем на себя заботу о чистоте вашего помещения. Используем профессиональное оборудование и сертифицированные гипоаллергенные эко-средства.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                            <a href="#contacts" class="animate-pulse-subtle inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-brand-blue to-brand-teal text-white font-bold text-lg hover:shadow-xl hover:opacity-95 transition-all transform hover:-translate-y-0.5">
+                                Оформить заявку <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="#services" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white text-brand-dark font-semibold text-lg border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm">
+                                Наши услуги
+                            </a>
+                        </div>
+
+                        <!-- Быстрые преимущества -->
+                        <div class="pt-8 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div class="flex flex-col items-center lg:items-start">
+                                <span class="text-brand-blue font-bold text-xl sm:text-2xl">Эко</span>
+                                <span class="text-xs sm:text-sm text-slate-500 font-medium">Безопасные средства</span>
+                            </div>
+                            <div class="flex flex-col items-center lg:items-start">
+                                <span class="text-brand-teal font-bold text-xl sm:text-2xl">24/7</span>
+                                <span class="text-xs sm:text-sm text-slate-500 font-medium">Прием заявок</span>
+                            </div>
+                            <div class="flex flex-col items-center lg:items-start">
+                                <span class="text-brand-blue font-bold text-xl sm:text-2xl">100%</span>
+                                <span class="text-xs sm:text-sm text-slate-500 font-medium">Контроль качества</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Изображение Hero -->
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-72 h-72 bg-brand-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute -bottom-4 -right-4 w-72 h-72 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Профессиональный клининг квартиры" 
+                                 class="w-full h-[400px] sm:h-[480px] object-cover hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-teal/20 text-brand-teal flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-check text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-brand-dark">Быстрый выезд бригады</p>
+                                    <p class="text-xs text-slate-500">Готовы выехать на объект в удобное время</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК О КОМПАНИИ -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1 space-y-6">
+                        <span class="text-brand-blue font-bold text-sm tracking-wider uppercase">О компании</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">
+                            «ИП Филюта» — ваш надежный эксперт в мире безупречной чистоты
+                        </h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            Мы специализируемся на полном спектре клининговых услуг для частных клиентов и бизнеса. Наш подход основан на жестких стандартах качества, пунктуальности и максимальном внимании к деталям.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            В работе используется современное немецкое оборудование и эффективные моющие составы, абсолютно безопасные для детей, домашних животных и аллергиков. Каждый сотрудник компании проходит специальное обучение.
+                        </p>
+                        
+                        <!-- Карточки с цифрами -->
+                        <div class="grid grid-cols-3 gap-4 pt-4">
+                            <div class="p-4 bg-brand-cardBg rounded-2xl border border-slate-100 text-center">
+                                <div class="text-3xl font-extrabold text-brand-blue">5+</div>
+                                <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Лет успешной работы</div>
+                            </div>
+                            <div class="p-4 bg-brand-cardBg rounded-2xl border border-slate-100 text-center">
+                                <div class="text-3xl font-extrabold text-brand-teal">1200+</div>
+                                <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Убранных объектов</div>
+                            </div>
+                            <div class="p-4 bg-brand-cardBg rounded-2xl border border-slate-100 text-center">
+                                <div class="text-3xl font-extrabold text-brand-blue">99%</div>
+                                <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Довольных клиентов</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=600&q=80" alt="Клининг офиса" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                        <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=600&q=80" alt="Чистящие средства" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК НАШИ УСЛУГИ -->
+        <section id="services" class="py-16 md:py-24 bg-brand-lightBg/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-brand-blue font-bold text-sm tracking-wider uppercase">Наши услуги</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Полный спектр клининговых услуг</h2>
+                    <p class="text-slate-600">Подберем оптимальный комплекс работ под любые ваши задачи и бюджет.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Услуга 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Поддерживающая уборка" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-brand-blue">Популярно</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Поддерживающая уборка</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Регулярная влажная и сухая уборка помещений, обеспыливание поверхностей, протирка зеркал и вынос мусора.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Поддерживающая уборка')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Услуга 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80" alt="Генеральная уборка" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Генеральная уборка</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Глубокая очистка всех труднодоступных мест, кухонной техники от жира, кафеля, сантехники и удаление сложных загрязнений.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Генеральная уборка')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Услуга 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=600&q=80" alt="Уборка после ремонта" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Уборка после ремонта</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Удаление строительной пыли, следов краски, цемента, затирки и скотча. Полная подготовка помещения к заезду.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Уборка после ремонта')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Услуга 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=600&q=80" alt="Мытье окон и витражей" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Мытье окон и витражей</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Профессиональное мытье остекления, рам, подоконников и откосов без разводов на любой высоте.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Мытье окон и витражей')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Услуга 5 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=600&q=80" alt="Химчистка мебели и ковров" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Химчистка мебели и ковров</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Глубокая экстракторная чистка мягкой мебели, матрасов и ковровых покрытий. Удаление пятен и запахов.</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Химчистка мебели')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Услуга 6 -->
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group border border-slate-100">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Клининг офисов" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow space-y-4">
+                            <h3 class="text-xl font-bold text-brand-dark">Клининг офисов и помещений</h3>
+                            <p class="text-slate-600 text-sm flex-grow">Комплексное обслуживание коммерческих объектов. Гибкий график работы (утром, вечером или в выходные).</p>
+                            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-500">[От заглушка руб.]</span>
+                                <button onclick="selectService('Клининг офисов')" class="px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white font-semibold text-sm transition-colors">
+                                    Заказать
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК ПРЕИМУЩЕСТВА -->
+        <section id="advantages" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-brand-teal font-bold text-sm tracking-wider uppercase">Почему выбирают нас</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Преимущества работы с ИП Филюта</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Преимущество 1 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-blue/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Экологичные средства</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Используем безопасные гипоаллергенные средства, без резких запахов и опасных химикатов.</p>
+                    </div>
+
+                    <!-- Преимущество 2 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-teal/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-teal/10 text-brand-teal flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Обученный персонал</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Наши клинеры прошли проверку, обучены стандартам работы с любыми типами поверхностей.</p>
+                    </div>
+
+                    <!-- Преимущество 3 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-blue/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Проф. оборудование</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Применяем мощные парогенераторы, экстракторы и пылесосы ведущих мировых марок.</p>
+                    </div>
+
+                    <!-- Преимущество 4 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-teal/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-teal/10 text-brand-teal flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Фиксированные цены</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Стоимость рассчитывается до начала работ и не меняется в процессе уборки. [Заглушка]</p>
+                    </div>
+
+                    <!-- Преимущество 5 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-blue/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Пунктуачность</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Приезжаем строго в согласованное время, выполняем работы без задержек и просрочек.</p>
+                    </div>
+
+                    <!-- Преимущество 6 -->
+                    <div class="p-8 rounded-2xl bg-brand-cardBg border border-slate-100 hover:border-brand-teal/30 transition-all duration-300">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-teal/10 text-brand-teal flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Гарантия качества</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Если вас что-то не устроит, мы оперативно устраним замечания прямо на месте.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК НАШИ РАБОТЫ (КАРУСЕЛЬ) -->
+        <section id="portfolio" class="py-16 md:py-24 bg-brand-lightBg/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-brand-blue font-bold text-sm tracking-wider uppercase">Галерея</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Примеры выполненных работ</h2>
+                    <p class="text-slate-600">Оцените качество и результаты нашей уборочной службы</p>
+                </div>
+
+                <!-- Карусель слайдер -->
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- Контейнер слайдов -->
+                    <div id="carousel" class="overflow-hidden rounded-3xl shadow-xl bg-white relative min-h-[350px] sm:min-h-[480px]">
+                        
+                        <!-- Слайд 1 -->
+                        <div class="carousel-item duration-500 ease-in-out absolute inset-0 transition-opacity opacity-100 z-10 flex flex-col md:flex-row">
+                            <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=1000&q=80" class="w-full md:w-1/2 h-64 md:h-full object-cover" alt="Уборка гостиной">
+                            <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2 space-y-3">
+                                <span class="text-xs font-bold text-brand-teal tracking-wider uppercase">Объект #1</span>
+                                <h3 class="text-2xl font-bold text-brand-dark">Генеральная уборка гостиной</h3>
+                                <p class="text-slate-600 text-sm">Проведена глубокая чистка напольных покрытий, мягкой мебели, обеспыливание интерьера и мытье оконных блоков.</p>
+                                <div class="pt-2 text-xs text-slate-400 font-medium">Время выполнения: ~4 часа</div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 2 -->
+                        <div class="carousel-item duration-500 ease-in-out absolute inset-0 transition-opacity opacity-0 pointer-events-none flex flex-col md:flex-row">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" class="w-full md:w-1/2 h-64 md:h-full object-cover" alt="Уборка ванной комнаты">
+                            <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2 space-y-3">
+                                <span class="text-xs font-bold text-brand-teal tracking-wider uppercase">Объект #2</span>
+                                <h3 class="text-2xl font-bold text-brand-dark">Дезинфекция ванной комнаты</h3>
+                                <p class="text-slate-600 text-sm">Удаление известкового налета, очистка межплиточных швов и дезинфекция всей сантехники специальными составами.</p>
+                                <div class="pt-2 text-xs text-slate-400 font-medium">Время выполнения: ~2.5 часа</div>
+                            </div>
+                        </div>
+
+                        <!-- Слайд 3 -->
+                        <div class="carousel-item duration-500 ease-in-out absolute inset-0 transition-opacity opacity-0 pointer-events-none flex flex-col md:flex-row">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80" class="w-full md:w-1/2 h-64 md:h-full object-cover" alt="Клининг офиса">
+                            <div class="p-6 md:p-8 flex flex-col justify-center w-full md:w-1/2 space-y-3">
+                                <span class="text-xs font-bold text-brand-teal tracking-wider uppercase">Объект #3</span>
+                                <h3 class="text-2xl font-bold text-brand-dark">Комплексный клининг офиса</h3>
+                                <p class="text-slate-600 text-sm">Уборка рабочих мест, обработка оргтехники, чистка ковролина и мытье панорамных окон коммерческого помещения.</p>
+                                <div class="pt-2 text-xs text-slate-400 font-medium">Время выполнения: ~6 часов</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Кнопки Навигации слайдера -->
+                    <button id="prev-slide" class="absolute top-1/2 -left-4 sm:-left-6 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-brand-dark shadow-lg hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center focus:outline-none" aria-label="Предыдущий слайд">
+                        <i class="fa-solid fa-chevron-left text-lg"></i>
+                    </button>
+                    <button id="next-slide" class="absolute top-1/2 -right-4 sm:-right-6 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-brand-dark shadow-lg hover:bg-brand-blue hover:text-white transition-all flex items-center justify-center focus:outline-none" aria-label="Следующий слайд">
+                        <i class="fa-solid fa-chevron-right text-lg"></i>
+                    </button>
+
+                    <!-- Точки-индикаторы -->
+                    <div id="carousel-dots" class="flex justify-center gap-2 mt-6">
+                        <button class="dot w-3 h-3 rounded-full bg-brand-blue transition-all" aria-label="Слайд 1"></button>
+                        <button class="dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-all" aria-label="Слайд 2"></button>
+                        <button class="dot w-3 h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-all" aria-label="Слайд 3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- БЛОК КОНТАКТЫ И ФОРМА -->
+        <section id="contacts" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-brand-blue font-bold text-sm tracking-wider uppercase">Контакты</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark">Свяжитесь с нами</h2>
+                    <p class="text-slate-600">Оставьте заявку или позвоните — ответим на все вопросы и рассчитаем стоимость</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12">
+                    
+                    <!-- Информационные контакты + Карта -->
+                    <div class="space-y-8 flex flex-col justify-between">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            
+                            <div class="p-6 bg-brand-cardBg rounded-2xl border border-slate-100 flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-brand-dark text-base">Телефон</h3>
+                                    <p class="text-slate-600 text-sm mt-1">+7 (XXX) XXX-XX-XX</p>
+                                    <span class="text-xs text-slate-400 font-medium">[Заполняемая заглушка]</span>
+                                </div>
+                            </div>
+
+                            <div class="p-6 bg-brand-cardBg rounded-2xl border border-slate-100 flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-teal/10 text-brand-teal flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-brand-dark text-base">E-mail</h3>
+                                    <p class="text-slate-600 text-sm mt-1">info@example.com</p>
+                                    <span class="text-xs text-slate-400 font-medium">[Заполняемая заглушка]</span>
+                                </div>
+                            </div>
+
+                            <div class="p-6 bg-brand-cardBg rounded-2xl border border-slate-100 flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-brand-dark text-base">Адрес</h3>
+                                    <p class="text-slate-600 text-sm mt-1">[Укажите адрес компании]</p>
+                                    <span class="text-xs text-slate-400 font-medium">[Заполняемая заглушка]</span>
+                                </div>
+                            </div>
+
+                            <div class="p-6 bg-brand-cardBg rounded-2xl border border-slate-100 flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-teal/10 text-brand-teal flex items-center justify-center text-xl flex-shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-brand-dark text-base">Режим работы</h3>
+                                    <p class="text-slate-600 text-sm mt-1">Пн - Вс: 08:00 – 20:00</p>
+                                    <span class="text-xs text-slate-400 font-medium">Без выходных</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Интерактивная карта Яндекс (заглушка/iframe) -->
+                        <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200 h-64 sm:h-80 relative bg-slate-100">
+                            <iframe 
+                                src="https://yandex.ru/map-widget/v1/?um=constructor%3A0000000000000000000000000000000000000000000000000000000000000000&amp;source=constructor" 
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0"
+                                class="w-full h-full border-0"
+                                title="Интерактивная карта Яндекс"
+                                loading="lazy">
+                            </iframe>
+                            <!-- Заглушка если ифрейм Яндекс карты не загрузился -->
+                            <div class="absolute inset-0 bg-slate-100 flex flex-col items-center justify-center text-slate-400 pointer-events-none -z-10">
+                                <i class="fa-solid fa-map-location-dot text-4xl mb-2 text-brand-blue"></i>
+                                <span class="text-sm font-medium">Интерактивная карта Яндекс</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма обратной связи -->
+                    <div class="bg-brand-cardBg p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-md">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-2">Оставить заявку</h3>
+                        <p class="text-slate-600 text-sm mb-6">Заполните форму, и мы свяжемся с вами в течение 15 минут.</p>
+
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="user-name" class="block text-sm font-semibold text-brand-dark mb-1">Ваше имя *</label>
+                                <input type="text" id="user-name" required placeholder="Иван Иванов" 
+                                       class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none">
+                                <span class="error-msg text-xs text-red-500 hidden mt-1">Пожалуйста, введите имя</span>
+                            </div>
+
+                            <div>
+                                <label for="user-phone" class="block text-sm font-semibold text-brand-dark mb-1">Номер телефона *</label>
+                                <input type="tel" id="user-phone" required placeholder="+7 (999) 000-00-00" 
+                                       class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none">
+                                <span class="error-msg text-xs text-red-500 hidden mt-1">Введите корректный номер телефона</span>
+                            </div>
+
+                            <div>
+                                <label for="user-service" class="block text-sm font-semibold text-brand-dark mb-1">Выберите услугу</label>
+                                <select id="user-service" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none bg-white">
+                                    <option value="Поддерживающая уборка">Поддерживающая уборка</option>
+                                    <option value="Генеральная уборка">Генеральная уборка</option>
+                                    <option value="Уборка после ремонта">Уборка после ремонта</option>
+                                    <option value="Мытье окон и витражей">Мытье окон и витражей</option>
+                                    <option value="Химчистка мебели">Химчистка мебели и ковров</option>
+                                    <option value="Клининг офисов">Клининг офисов и помещений</option>
+                                    <option value="Другое">Другое / Консультация</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="user-comment" class="block text-sm font-semibold text-brand-dark mb-1">Комментарий или пожелания</label>
+                                <textarea id="user-comment" rows="3" placeholder="Укажите площадь помещения или удобное время вызова..." 
+                                          class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all outline-none resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-blue to-brand-teal text-white font-bold text-base hover:shadow-lg hover:opacity-95 transition-all shadow-md active:scale-[0.99]">
+                                Отправить заявку
+                            </button>
+
+                            <p class="text-xs text-slate-400 text-center mt-3">
+                                Нажимая кнопку, вы даете согласие на обработку персональных данных.
+                            </p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER / ПОДВАЛ -->
+    <footer class="bg-brand-dark text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                
+                <!-- О компании в футере -->
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-blue to-brand-teal flex items-center justify-center text-white">
+                            <i class="fa-solid fa-sparkles text-lg"></i>
+                        </div>
+                        <span class="font-bold text-lg text-white">ИП Филюта</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Профессиональные клининговые услуги высочайшего качества для дома и офиса. Наводим порядок с душой.
+                    </p>
+                </div>
+
+                <!-- Быстрая навигация -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#about" class="hover:text-brand-blue transition-colors">О компании</a></li>
+                        <li><a href="#services" class="hover:text-brand-blue transition-colors">Услуги</a></li>
+                        <li><a href="#advantages" class="hover:text-brand-blue transition-colors">Преимущества</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-blue transition-colors">Работы</a></li>
+                        <li><a href="#contacts" class="hover:text-brand-blue transition-colors">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <!-- Услуги в футере -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Услуги</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#services" class="hover:text-brand-blue transition-colors">Генеральная уборка</a></li>
+                        <li><a href="#services" class="hover:text-brand-blue transition-colors">Уборка после ремонта</a></li>
+                        <li><a href="#services" class="hover:text-brand-blue transition-colors">Мытье окон</a></li>
+                        <li><a href="#services" class="hover:text-brand-blue transition-colors">Химчистка мебели</a></li>
+                    </ul>
+                </div>
+
+                <!-- Контакты в футере -->
+                <div>
+                    <h4 class="text-white font-bold text-base mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><i class="fa-solid fa-phone mr-2 text-brand-teal"></i> +7 (XXX) XXX-XX-XX</li>
+                        <li><i class="fa-solid fa-envelope mr-2 text-brand-teal"></i> info@example.com</li>
+                        <li><i class="fa-solid fa-location-dot mr-2 text-brand-teal"></i> [Адрес компании]</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Копирайт -->
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>© ИП Филюта. Все права защищены.</p>
+                <p>Сайт создано в демонстрационных целях.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО УСПЕШНОЙ ОТПРАВКИ -->
+    <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center space-y-4 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-brand-teal flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-brand-dark">Заявка принята!</h3>
+            <p class="text-slate-600 text-sm">
+                Спасибо за обращение. Менеджер компании «ИП Филюта» свяжется с вами по указанному номеру в ближайшее время.
+            </p>
+            <button id="close-modal-btn" class="w-full py-3 rounded-xl bg-brand-blue text-white font-bold hover:bg-brand-hoverBlue transition-colors">
+                Отлично
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ЛОГИКА -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Мобильное Меню ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                
+                // Переключение иконки
+                if (isOpen) {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                }
+            });
+
+            // Закрытие мобильного меню при клике на ссылку
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // --- 2. Карусель слайдер ---
+            const slides = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.remove('opacity-0', 'pointer-events-none');
+                        slide.classList.add('opacity-100', 'z-10');
+                    } else {
+                        slide.classList.remove('opacity-100', 'z-10');
+                        slide.classList.add('opacity-0', 'pointer-events-none');
+                    }
+                });
+
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-slate-300');
+                        dot.classList.add('bg-brand-blue', 'w-6');
+                    } else {
+                        dot.classList.remove('bg-brand-blue', 'w-6');
+                        dot.classList.add('bg-slate-300');
+                    }
+                });
+                currentSlide = index;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                let next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                let prev = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prev);
+            });
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => showSlide(i));
+            });
+
+            // Свайпы для мобильных устройств слайдера
+            const carouselContainer = document.getElementById('carousel');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carouselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carouselContainer.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 40) {
+                    // Свайп влево -> следующий слайд
+                    let next = (currentSlide + 1) % slides.length;
+                    showSlide(next);
+                }
+                if (touchEndX > touchStartX + 40) {
+                    // Свайп вправо -> предыдущий слайд
+                    let prev = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(prev);
+                }
+            }
+
+            // Автопереключение слайдов каждые 6 секунд
+            setInterval(() => {
+                let next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }, 6000);
+
+            // --- 3. Выбор услуги из карточки ---
+            window.selectService = function(serviceName) {
+                const serviceSelect = document.getElementById('user-service');
+                if (serviceSelect) {
+                    serviceSelect.value = serviceName;
+                }
+                const contactsSection = document.getElementById('contacts');
+                contactsSection.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            // --- 4. Форма обратной связи & Модальное окно ---
+            const form = document.getElementById('contact-form');
+            const successModal = document.getElementById('success-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const nameInput = document.getElementById('user-name');
+                const phoneInput = document.getElementById('user-phone');
+                let isValid = true;
+
+                // Валидация имени
+                if (!nameInput.value.trim()) {
+                    showError(nameInput, true);
+                    isValid = false;
+                } else {
+                    showError(nameInput, false);
+                }
+
+                // Простая валидация телефона
+                if (!phoneInput.value.trim() || phoneInput.value.trim().length < 6) {
+                    showError(phoneInput, true);
+                    isValid = false;
+                } else {
+                    showError(phoneInput, false);
+                }
+
+                if (isValid) {
+                    // Симуляция успешной отправки формы
+                    openModal();
+                    form.reset();
+                }
+            });
+
+            function showError(inputElement, isError) {
+                const parent = inputElement.parentElement;
+                const errorMsg = parent.querySelector('.error-msg');
+                if (isError) {
+                    inputElement.classList.add('border-red-500');
+                    if(errorMsg) errorMsg.classList.remove('hidden');
+                } else {
+                    inputElement.classList.remove('border-red-500');
+                    if(errorMsg) errorMsg.classList.add('hidden');
+                }
+            }
+
+            function openModal() {
+                successModal.classList.remove('opacity-0', 'pointer-events-none');
+                successModal.classList.add('opacity-100');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }
+
+            function closeModal() {
+                successModal.classList.remove('opacity-100');
+                successModal.classList.add('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            successModal.addEventListener('click', (e) => {
+                if (e.target === successModal) closeModal();
+            });
+        });
+    </script>
+</body>
+</html>
